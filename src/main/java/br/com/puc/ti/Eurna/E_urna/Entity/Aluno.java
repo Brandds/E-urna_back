@@ -1,5 +1,6 @@
 package br.com.puc.ti.Eurna.E_urna.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +14,9 @@ public class Aluno {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private String nome;
-  private Long matricula;
+  @Column(unique = true)
+  private Long numMatricula;
   private String email;
   private String senha;
   public Aluno(){}
