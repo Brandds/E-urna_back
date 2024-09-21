@@ -22,7 +22,6 @@ public class Aluno {
   public Aluno(){}
   
   public void adicionar(){
-    String nome2 = getNome();
   }
   
 }

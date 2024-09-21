@@ -32,7 +32,7 @@ public class LoginController {
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody AlunoVO login){
     
-
+    
     boolean validarUsuario = alunoService.validarUsuario(login.getNome(),login.getSenha());
 
     if(validarUsuario){
