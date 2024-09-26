@@ -7,7 +7,7 @@ public class AlunoVO {
 
   
   private String nome;
-  private Long matricula;
+  private String matricula;
   private String email;
   private String senha;
 }

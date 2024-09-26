@@ -14,13 +14,13 @@ public class AlunoService {
   @Autowired
   private AlunoRepository alunoRepository;
   
-  public boolean validarUsuario(String username, String senha){
-    Optional<Aluno> useOptional =  alunoRepository.findByNome(username);
+  public boolean validarUsuario(String matricula , String senha){
+    Optional<Aluno> userMatricula = alunoRepository.findByNumMatricula(matricula);
 
-    if(useOptional.isPresent()){
-      Aluno aluno = useOptional.get();
+    if(userMatricula.isPresent()){
+      Aluno aluno = userMatricula.get();
 
-      return aluno.getSenha().equals(senha);
+      return aluno.getSenha() != null && aluno.getSenha().equals(senha);
     }
     return false;
 

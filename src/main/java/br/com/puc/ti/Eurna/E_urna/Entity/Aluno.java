@@ -15,8 +15,8 @@ public class Aluno {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nome;
-  @Column(unique = true)
-  private Long numMatricula;
+  @Column(name= "num_Matricula", unique = true)
+  private String numMatricula;
   private String email;
   private String senha;
   public Aluno(){}

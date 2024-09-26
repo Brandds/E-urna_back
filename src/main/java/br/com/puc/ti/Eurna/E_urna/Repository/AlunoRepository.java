@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Aluno;
 
+
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
-  Optional<Aluno> findByNome(String aluno);
+  Optional<Aluno> findBySenha(String senhaUsuario);
+  Optional<Aluno> findByNumMatricula(String numMatricula);;
 }

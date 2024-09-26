@@ -33,7 +33,7 @@ public class LoginController {
   public ResponseEntity<?> login(@RequestBody AlunoVO login){
     
     
-    boolean validarUsuario = alunoService.validarUsuario(login.getNome(),login.getSenha());
+    boolean validarUsuario = alunoService.validarUsuario(login.getMatricula(),login.getSenha());
 
     if(validarUsuario){
       return ResponseEntity.ok("Usuario bem sucedido");
