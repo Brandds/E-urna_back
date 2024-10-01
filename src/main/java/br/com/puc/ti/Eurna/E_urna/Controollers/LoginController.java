@@ -9,31 +9,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.puc.ti.Eurna.E_urna.Entity.Aluno;
-import br.com.puc.ti.Eurna.E_urna.Service.AlunoService;
-import br.com.puc.ti.Eurna.E_urna.VO.AlunoVO;
+import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
+import br.com.puc.ti.Eurna.E_urna.Repository.UsuarioRepository;
+import br.com.puc.ti.Eurna.E_urna.Service.UsuarioService;
+import br.com.puc.ti.Eurna.E_urna.VO.UsuarioVo;
 
 
 @RestController
 @RequestMapping("/api/v1")
 public class LoginController {
   
-  @Autowired
-  private  AlunoService alunoService;
+  @Autowired UsuarioService usuarioService;
+
+  @Autowired UsuarioRepository usuarioRepository;
 
 
   
   @GetMapping("/users")
-  public Aluno getTodosUsuarios(){
-    Aluno all = new Aluno();
+  public Usuario getTodosUsuarios(){
+    Usuario all = new Usuario();
     return all;
   }
 
   @PostMapping("/login")
-  public ResponseEntity<?> login(@RequestBody AlunoVO login){
+  public ResponseEntity<?> login(@RequestBody UsuarioVo login){
     
     
-    boolean validarUsuario = alunoService.validarUsuario(login.getMatricula(),login.getSenha());
+    boolean validarUsuario = usuarioService.validarUsuario(login.getNumeroMatriculaPessoa(),login.getSenhaUsuario());
 
     if(validarUsuario){
       return ResponseEntity.ok("Usuario bem sucedido");
@@ -42,4 +44,18 @@ public class LoginController {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario ou senha invalidos");
 
   }
+  @PostMapping("/cadastro")
+
+  public ResponseEntity<?> criarUsuario(@RequestBody UsuarioVo newEnity) {
+      
+      if(usuarioService.validarCadastroUsuario(newEnity.getNumeroMatriculaPessoa()))
+      {
+        Usuario usuario = new Usuario();
+        usuario.adicionarUsuario(newEnity);
+        usuarioRepository.save(usuario);
+        return ResponseEntity.ok("Usuario criado com sucesso!");
+      }
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Esse usuário já existe");
+  }
+  
 }

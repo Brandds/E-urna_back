@@ -1,5 +1,6 @@
 package br.com.puc.ti.Eurna.E_urna.Entity;
 
+import br.com.puc.ti.Eurna.E_urna.VO.UsuarioVo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Aluno {
+public class Usuario {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,13 @@ public class Aluno {
   private String numMatricula;
   private String email;
   private String senha;
-  public Aluno(){}
+  public Usuario(){}
   
-  public void adicionar(){
+  public void adicionarUsuario(UsuarioVo usuarioVo){
+    setNome(usuarioVo.getNomeUsuario());
+    setNumMatricula(usuarioVo.getNumeroMatriculaPessoa());
+    setSenha(usuarioVo.getSenhaUsuario());
+    setEmail(null);
   }
   
 }
