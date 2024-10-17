@@ -1,5 +1,6 @@
 package br.com.puc.ti.Eurna.E_urna.ServiceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,12 @@ public class UsuarioServiceImpl implements UsuarioService {
       return false;  // Matrícula já existe
     }
     return true;  // Matrícula disponível
+  }
+
+  @Override
+
+  public List<Usuario> getUsuarios(){
+    List<Usuario> usuarios = usuarioRepository.findAll();
+    return usuarios;
   }
 }

@@ -10,5 +10,5 @@ public class UsuarioVo  {
   private String numeroMatriculaPessoa;
   private String email;
   private String senhaUsuario;
-
+  private String curso;
 }

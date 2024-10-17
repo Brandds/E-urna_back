@@ -1,11 +1,18 @@
 package br.com.puc.ti.Eurna.E_urna.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 
 @Service
 public interface UsuarioService {
   
-  public boolean validarUsuario(String matricula , String senha);
+  boolean validarUsuario(String matricula , String senha);
 
-  public boolean validarCadastroUsuario(String newMatricula);
+  boolean validarCadastroUsuario(String newMatricula);
+
+  List<Usuario> getUsuarios();
+
 }

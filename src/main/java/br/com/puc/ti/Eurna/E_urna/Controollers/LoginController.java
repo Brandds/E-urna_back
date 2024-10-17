@@ -1,5 +1,7 @@
 package br.com.puc.ti.Eurna.E_urna.Controollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +27,9 @@ public class LoginController {
 
 
   
-  @GetMapping("/users")
-  public Usuario getTodosUsuarios(){
-    Usuario all = new Usuario();
-    return all;
+  @GetMapping("/usuarioAll")
+  public ResponseEntity<List<Usuario>> getAllUsuarios(){
+    return new ResponseEntity<>(usuarioService.getUsuarios(), HttpStatus.OK);
   }
 
   @PostMapping("/login")

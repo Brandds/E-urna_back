@@ -11,5 +11,4 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
   Optional<Usuario> findBySenha(String senhaUsuario);
   Optional<Usuario> findByNumMatricula(String numMatricula);;
-  
 }

@@ -15,18 +15,25 @@ public class Usuario {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private String nome;
+
   @Column(name= "num_Matricula", unique = true)
   private String numMatricula;
+  
   private String email;
+  
   private String senha;
+  
+  private String curso;
   public Usuario(){}
   
   public void adicionarUsuario(UsuarioVo usuarioVo){
     setNome(usuarioVo.getNomeUsuario());
     setNumMatricula(usuarioVo.getNumeroMatriculaPessoa());
     setSenha(usuarioVo.getSenhaUsuario());
-    setEmail(null);
+    setEmail(usuarioVo.getEmail());
+    setCurso(usuarioVo.getCurso());
   }
   
 }
