@@ -15,6 +15,9 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 import br.com.puc.ti.Eurna.E_urna.Repository.UsuarioRepository;
 import br.com.puc.ti.Eurna.E_urna.Service.UsuarioService;
 import br.com.puc.ti.Eurna.E_urna.VO.UsuarioVo;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -58,5 +61,14 @@ public class LoginController {
       }
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Esse usuário já existe");
   }
-  
+  @PutMapping("/updateUsuario/{id}")
+  public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody UsuarioVo entity) {
+      Usuario usuario = usuarioService.updateUsuario(id, entity);
+
+      if(usuario != null){
+        return ResponseEntity.ok(usuario);
+      }
+      
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+  }
 }

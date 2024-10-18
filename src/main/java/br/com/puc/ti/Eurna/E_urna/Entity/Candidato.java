@@ -24,7 +24,7 @@ public class Candidato {
   private String curso;
 
   @Column(name = "numero_candidato", nullable = false, unique = true)
-    private Integer numeroCandidato;  
+  private Integer numeroCandidato;  
 
   @ManyToOne
   @JoinColumn(name = "pleito_id", nullable = false)

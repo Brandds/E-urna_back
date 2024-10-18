@@ -36,4 +36,5 @@ public class Usuario {
     setCurso(usuarioVo.getCurso());
   }
   
+ 
 }
