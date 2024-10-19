@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 
 
+
 @Repository
 public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
 
   Optional<Candidato> findById(Long id);
+  Optional<Candidato> findByNumeroCandidato(Integer numeroCandidato);
 }

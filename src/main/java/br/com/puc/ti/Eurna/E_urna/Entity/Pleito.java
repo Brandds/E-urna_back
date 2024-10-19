@@ -31,4 +31,10 @@ public class Pleito {
   
   @OneToMany(mappedBy = "pleito", cascade = CascadeType.ALL)
     private List<Candidato> candidatos;
+
+  public Pleito(Long id){
+    this.id = id;
+  }
+
+  public Pleito(){}
 }
