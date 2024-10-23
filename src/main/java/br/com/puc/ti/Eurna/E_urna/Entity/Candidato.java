@@ -24,10 +24,14 @@ public class Candidato {
   private String curso;
 
   @Column(name = "numero_candidato", nullable = false, unique = true)
-  private Integer numeroCandidato;  
+  private Long numeroCandidato;  
 
   @ManyToOne
   @JoinColumn(name = "pleito_id", nullable = false)
   private Pleito pleito;
 
+  public Candidato(){}
+  public Candidato(Long id){
+    this.id = id;
+  }
 }

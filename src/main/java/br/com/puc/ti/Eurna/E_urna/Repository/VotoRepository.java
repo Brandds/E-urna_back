@@ -1,12 +1,18 @@
 package br.com.puc.ti.Eurna.E_urna.Repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 
+
 @Repository
 public interface VotoRepository extends JpaRepository<Voto, Long> {
 
+  @Query("SELECT v FROM Voto v WHERE v.usuario.id = :id")
+  Optional<Voto> findByUsuario(Long id);
   
 }

@@ -13,6 +13,6 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
 
   Optional<Candidato> findById(Long id);
-  Optional<Candidato> findByNumeroCandidato(Integer numeroCandidato);
+  Optional<Candidato> findByNumeroCandidato(Long numeroCandidato);
   List<Candidato> findByPleitoId(Long id);
 }

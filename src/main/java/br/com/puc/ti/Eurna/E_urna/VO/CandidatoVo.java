@@ -7,6 +7,6 @@ public class CandidatoVo {
   private Long id;
   private String nomeCandidato;
   private String cursoCandidato;
-  private Integer numeroCandidato;
+  private long numeroCandidato;
   private PleitoVo pleito_Id_Candidato;
 }

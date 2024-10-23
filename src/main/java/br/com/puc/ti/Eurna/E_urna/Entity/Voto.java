@@ -27,12 +27,11 @@ public class Voto {
   private Integer numeroVotos;
 
   @Column(name = "data_registro")
-  @Temporal(TemporalType.TIMESTAMP)
+  @Temporal(TemporalType.DATE)
   private Date dataRegistro;
 
   @ManyToOne
-  @JoinColumn(name = "matricula_candidato", nullable = false)
-  private Candidato candidato;
-
+@JoinColumn(name = "matricula_usuario", referencedColumnName = "id", nullable = false)
+  private Usuario usuario;
 
 }

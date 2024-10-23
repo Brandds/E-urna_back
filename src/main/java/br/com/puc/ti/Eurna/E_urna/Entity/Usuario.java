@@ -18,7 +18,7 @@ public class Usuario {
 
   private String nome;
 
-  @Column(name= "num_Matricula", unique = true)
+  @Column(name= "num_matricula", unique = true)
   private String numMatricula;
   
   private String email;
@@ -34,6 +34,10 @@ public class Usuario {
     setSenha(usuarioVo.getSenhaUsuario());
     setEmail(usuarioVo.getEmail());
     setCurso(usuarioVo.getCurso());
+  }
+  public Usuario(String _numMatricula, Long _id){
+    this.id = _id;
+    this.numMatricula = _numMatricula;
   }
   
  
