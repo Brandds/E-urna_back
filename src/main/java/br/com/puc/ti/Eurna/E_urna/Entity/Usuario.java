@@ -35,9 +35,8 @@ public class Usuario {
     setEmail(usuarioVo.getEmail());
     setCurso(usuarioVo.getCurso());
   }
-  public Usuario(String _numMatricula, Long _id){
+  public Usuario( Long _id){
     this.id = _id;
-    this.numMatricula = _numMatricula;
   }
   
  

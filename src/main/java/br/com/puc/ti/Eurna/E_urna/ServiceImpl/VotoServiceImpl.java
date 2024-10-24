@@ -29,7 +29,8 @@ public class VotoServiceImpl implements VotoService {
     voto.setNumeroVotos(1);
     voto.setDataRegistro(dataRegistro);
 
-    voto.setCandidato(new Candidato(entity.getCandidatoVo().getNumeroCandidato(), entity.getCandidatoVo().getId()));
+    voto.setCandidato(new Candidato(entity.getCandidatoVo().getId()));
+    voto.setUsuario(new Usuario(entity.getUsuarioVo().getId()));
     return voto;
 
   } 
@@ -40,27 +41,30 @@ public class VotoServiceImpl implements VotoService {
   }
 
   @Override
-  public Optional<Voto> findById(Long id) {
+  public Voto adicionarVoto(VotoVo entity) {
+      Optional<Voto> voto = votoRepository.findByUsuario(entity.getUsuarioVo().getId());
+      if(!voto.isPresent()){
+        Voto newVoto = toEntity(entity);
+        votoRepository.save(newVoto);
+         return newVoto;
+      }
+      return null;
+    }
+
+  @Override
+  public Voto getVotoUsuario(Long id) {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    Optional<Voto> votoUsuario = votoRepository.findByUsuario(id);
+    if(votoUsuario.isPresent()){
+      return votoUsuario.get();
+    }
+    return null;
   }
 
   @Override
-  public Voto adicionarVoto(VotoVo entity) {
-    // TODO 
-    if(!votoRepository.findByCandidato(entity.getCandidatoVo().getId()).isPresent()){
-      Optional<Voto> voto = votoRepository.findById(entity.getId());
-      if(voto.isPresent()){
-        voto.get().setNumeroVotos(voto.get().getNumeroVotos() + 1);
-        return voto.get();
-      }else{
-        Voto newVoto = toEntity(entity);
-        votoRepository.save(newVoto);
-      return newVoto;
-      }
-    }
-
-    return null;
+  public Integer calcularVotoUusuario(Long id){
+    return votoRepository.findVotosCanidados(id);
   }
-  
 }
+  
+
