@@ -34,4 +34,9 @@ public class Candidato {
   public Candidato(Long id){
     this.id = id;
   }
+  public Candidato(Long _numeroCandidato, Long _id){
+    this.id = _id;
+    this.numeroCandidato = _numeroCandidato;
+  }
+  
 }

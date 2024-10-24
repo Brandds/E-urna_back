@@ -10,5 +10,5 @@ public class VotoVo {
   private Long id;
   private Integer numeroVotos;
   private Date dataRegistro;
-  private UsuarioVo usuarioVo;
+  private CandidatoVo candidatoVo;
 }

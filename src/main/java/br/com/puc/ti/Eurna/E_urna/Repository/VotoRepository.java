@@ -12,7 +12,7 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 @Repository
 public interface VotoRepository extends JpaRepository<Voto, Long> {
 
-  @Query("SELECT v FROM Voto v WHERE v.usuario.id = :id")
-  Optional<Voto> findByUsuario(Long id);
+  @Query("SELECT v FROM Voto v WHERE v.candidato.id = :id")
+  Optional<Voto> findByCandidato(Long id);
   
 }

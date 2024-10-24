@@ -31,7 +31,10 @@ public class Voto {
   private Date dataRegistro;
 
   @ManyToOne
-@JoinColumn(name = "matricula_usuario", referencedColumnName = "id", nullable = false)
-  private Usuario usuario;
+@JoinColumn(name = "numero_candidato", referencedColumnName = "id", nullable = false)
+  private Candidato candidato;
 
+  @ManyToOne
+@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
+  private Usuario usuario;
 }

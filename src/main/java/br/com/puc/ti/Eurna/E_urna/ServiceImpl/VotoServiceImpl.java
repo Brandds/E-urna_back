@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 import br.com.puc.ti.Eurna.E_urna.Repository.VotoRepository;
@@ -28,7 +29,7 @@ public class VotoServiceImpl implements VotoService {
     voto.setNumeroVotos(1);
     voto.setDataRegistro(dataRegistro);
 
-    voto.setUsuario(new Usuario(entity.getUsuarioVo().getNumeroMatriculaPessoa(), entity.getUsuarioVo().getId()));
+    voto.setCandidato(new Candidato(entity.getCandidatoVo().getNumeroCandidato(), entity.getCandidatoVo().getId()));
     return voto;
 
   } 
@@ -47,12 +48,16 @@ public class VotoServiceImpl implements VotoService {
   @Override
   public Voto adicionarVoto(VotoVo entity) {
     // TODO 
-    Optional<Voto> voto = votoRepository.findByUsuario(1l);
-
-    if(!voto.isPresent()){
-      Voto newVoto = toEntity(entity);
-      votoRepository.save(newVoto);
+    if(!votoRepository.findByCandidato(entity.getCandidatoVo().getId()).isPresent()){
+      Optional<Voto> voto = votoRepository.findById(entity.getId());
+      if(voto.isPresent()){
+        voto.get().setNumeroVotos(voto.get().getNumeroVotos() + 1);
+        return voto.get();
+      }else{
+        Voto newVoto = toEntity(entity);
+        votoRepository.save(newVoto);
       return newVoto;
+      }
     }
 
     return null;
