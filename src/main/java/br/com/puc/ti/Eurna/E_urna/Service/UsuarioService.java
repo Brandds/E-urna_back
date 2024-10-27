@@ -18,4 +18,6 @@ public interface UsuarioService {
 
   Usuario updateUsuario(Long id, UsuarioVo usuarioVo);
 
+  boolean removerUsuario(Long id);
+
 }

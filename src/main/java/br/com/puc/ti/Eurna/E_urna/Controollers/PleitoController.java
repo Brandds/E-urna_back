@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,9 @@ import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
 
 
 
+
 @RestController
-@RequestMapping("/api/v3")
+@RequestMapping("/pleito")
 public class PleitoController {
   
   @Autowired
@@ -54,5 +56,22 @@ public class PleitoController {
       return new ResponseEntity<>("Erro ao criar pleito", HttpStatus.BAD_REQUEST);
   }
   
-  
+  @PutMapping("/atualizarPleito/{id}")
+  public ResponseEntity atualizarPleito(@PathVariable Long id) {
+      Pleito pleito = pleitoService.atualizarPleito(id);
+      if(pleito  != null){
+        return ResponseEntity.ok(pleito);
+      }
+      return ResponseEntity.badRequest().body("Não encontramos o pleito");
+  }
+ 
+  @PutMapping("/removerPleito/{id}")
+  public ResponseEntity removerPleito(@PathVariable Long id) {
+      return (pleitoService.removerPleito(id) ? 
+      ResponseEntity.ok("Pleito excluido com sucesso") :
+      ResponseEntity.badRequest().body("Pleito não foi encontrado")
+      );
+      
+
+  }
 }

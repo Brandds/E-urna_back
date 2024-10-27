@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 import br.com.puc.ti.Eurna.E_urna.Service.VotoService;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
@@ -17,7 +18,7 @@ import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
 
 
 @RestController
-@RequestMapping("/api/v4")
+@RequestMapping("/voto")
 public class VotoController {
 
   @Autowired
@@ -39,17 +40,23 @@ public class VotoController {
   
   @PostMapping("/buscarVoto/{id}")
   public ResponseEntity buscarVoto(@PathVariable Long id) {
-      Voto voto = votoService.getVotoUsuario(id);
-      if(voto != null){
-        return  new  ResponseEntity<>("Voto encontrado", HttpStatus.OK);
+      Usuario usuario = votoService.getVotoUsuario(id);
+      if(usuario != null){
+        return  new  ResponseEntity<>(usuario, HttpStatus.OK);
       }
       return new ResponseEntity<>("Não foi encontrado o voto", HttpStatus.BAD_REQUEST);
   }
 
   @PostMapping("/votosCandidato/{id}")
-  public Integer postMethodName(@PathVariable Long id) {
-      return votoService.calcularVotoUusuario(id);
-  }
+  public String calcularVotos(@PathVariable Long id) {
+      Integer valor =  votoService.calcularVotoUusuario(id);
+      String mensagem = "O candidato tem" + " " +  valor +  " votos";
+      if(valor != null){
+        return mensagem;
+      }
+
+      return mensagem = "Não foi encontrado o candidato";
+    }
   
   
   

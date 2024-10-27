@@ -14,4 +14,6 @@ public interface CandidatoService {
   List<Candidato> findAll();
   Optional<Candidato> findByCandidato(Long id);
   Candidato adicionarCandidato(CandidatoVo entity);
+  Candidato updateCandidato(Long id, CandidatoVo  entity );
+  boolean removerCandidato(Long id);
 }

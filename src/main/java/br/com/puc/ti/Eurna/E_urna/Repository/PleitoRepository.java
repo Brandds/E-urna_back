@@ -23,6 +23,11 @@ public interface PleitoRepository  extends JpaRepository<Pleito, Long>{
 
   @Modifying
   @Transactional
+  @Query("UPDATE Pleito p  SET p.status = 'ENCERRADO' WHERE p.id = :id")
+  int updateStatus(@Param("id") Long id);
+
+  @Modifying
+  @Transactional
   @Query("UPDATE Pleito p SET p.status = 'ENCERRADO' WHERE p.dataTermino <= CURRENT_TIMESTAMP")
   int encerrarPleitos();
 

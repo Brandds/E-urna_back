@@ -6,23 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 import br.com.puc.ti.Eurna.E_urna.Service.CandidatoService;
 import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
 
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
 
-@Controller
-@RequestMapping("/api/v2")
+@RestController
+@RequestMapping("/candidato")
 public class CandidatoController {
 
   @Autowired
@@ -56,7 +57,21 @@ public class CandidatoController {
       return new ResponseEntity<>("Candidato já criado", HttpStatus.NOT_FOUND) ;
   }
   
-  
+  @PutMapping("/updateCandidato/{id}")
+  public ResponseEntity updateCandidato(@PathVariable Long id , @RequestBody CandidatoVo entity) {
+      Candidato candidato = candidatoService.updateCandidato(id, entity);
+
+      if(candidato != null) {
+        return ResponseEntity.ok(candidato);
+      }
+      return ResponseEntity.badRequest().body("Não encontramos esse candidato");
+  }
+  @PutMapping("/removerCandidato/{id}")
+  public ResponseEntity removerCandidato(@PathVariable Long id) {
+      return (candidatoService.removerCandidato(id) ? 
+      ResponseEntity.ok("Candidato removido com sucesso") : 
+      ResponseEntity.badRequest().body("Candidato não encontrado"));
+  }
 
   
 }

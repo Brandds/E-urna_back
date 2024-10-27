@@ -30,6 +30,14 @@ public class CandidatoServiceImpl implements CandidatoService  {
     return newCandidato;
   }
 
+  public Candidato updateToEntity(CandidatoVo vo, Candidato candidato){
+
+    candidato.setCurso(vo.getCursoCandidato());
+    candidato.setNumeroCandidato(vo.getNumeroCandidato());
+    candidato.setPleito(new Pleito(vo.getPleito_Id_Candidato().getId()));
+
+    return candidato;
+  }
   @Override
   public List<Candidato> findAll() {
      List<Candidato> candidatos = candidatoRepository.findAll();
@@ -55,4 +63,27 @@ public class CandidatoServiceImpl implements CandidatoService  {
     return null;
   }
   
+  @Override
+  public Candidato updateCandidato(Long id, CandidatoVo entity ){
+    Optional<Candidato> candidato = candidatoRepository.findById(id);
+
+    if(candidato.isPresent()){
+      return candidatoRepository.save(updateToEntity(entity, candidato.get()));
+    }
+
+    return null;
+  }
+
+  @Override
+  public boolean removerCandidato(Long id){
+    Optional<Candidato> candidato = candidatoRepository.findById(id);
+
+    if(candidato.isPresent()){
+      candidatoRepository.delete(candidato.get());
+      return true;
+    }
+
+    return false;
+
+  }
 }

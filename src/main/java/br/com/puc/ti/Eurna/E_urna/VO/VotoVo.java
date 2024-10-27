@@ -12,4 +12,5 @@ public class VotoVo {
   private Date dataRegistro;
   private CandidatoVo candidatoVo;
   private UsuarioVo usuarioVo;
+  private PleitoVo pleitoVo;
 }

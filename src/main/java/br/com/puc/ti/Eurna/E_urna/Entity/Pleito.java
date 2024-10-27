@@ -47,6 +47,9 @@ public class Pleito {
   public Pleito(Long id){
     this.id = id;
   }
+
+  public Pleito(){}
+  
   private StatusPleito calcularStatus(){
     Date hoje = new Date();
     
@@ -58,5 +61,4 @@ public class Pleito {
 
 
   }
-  public Pleito(){}
 }

@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
+import br.com.puc.ti.Eurna.E_urna.Entity.Pleito;
 import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
+import br.com.puc.ti.Eurna.E_urna.Repository.UsuarioRepository;
 import br.com.puc.ti.Eurna.E_urna.Repository.VotoRepository;
 import br.com.puc.ti.Eurna.E_urna.Service.VotoService;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
@@ -22,15 +24,20 @@ public class VotoServiceImpl implements VotoService {
   @Autowired
   private VotoRepository votoRepository;
 
+  @Autowired 
+  private UsuarioRepository usuarioRepository;
+
   public Voto toEntity(VotoVo entity){
     Voto voto = new Voto();
     LocalDate localDate = LocalDate.now();
     Date dataRegistro = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
     voto.setNumeroVotos(1);
     voto.setDataRegistro(dataRegistro);
 
     voto.setCandidato(new Candidato(entity.getCandidatoVo().getId()));
     voto.setUsuario(new Usuario(entity.getUsuarioVo().getId()));
+    voto.setPleito(new Pleito(entity.getPleitoVo().getId()));
     return voto;
 
   } 
@@ -52,11 +59,11 @@ public class VotoServiceImpl implements VotoService {
     }
 
   @Override
-  public Voto getVotoUsuario(Long id) {
-    // TODO Auto-generated method stub
+  public Usuario getVotoUsuario(Long id) {
     Optional<Voto> votoUsuario = votoRepository.findByUsuario(id);
     if(votoUsuario.isPresent()){
-      return votoUsuario.get();
+      Optional<Usuario> usuario =  usuarioRepository.findById(id);
+      return usuario.get();
     }
     return null;
   }

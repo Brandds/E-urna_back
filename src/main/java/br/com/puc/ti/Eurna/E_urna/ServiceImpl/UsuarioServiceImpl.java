@@ -59,8 +59,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     if(usuario.isPresent()){
       Usuario updateUsuario = toEntity(usuario.get(), usuarioVo);
       usuarioRepository.save(updateUsuario);
+      return usuario.get();
     }
     
-    return usuario.get();
+    return null;
+  }
+
+  @Override 
+  public boolean removerUsuario(Long id)
+  {
+      Optional<Usuario> usuario =usuarioRepository.findById(id);
+
+      if(usuario.isPresent()){
+        usuarioRepository.delete(usuario.get());
+        return true;
+      }
+      return false;
+
   }
 }

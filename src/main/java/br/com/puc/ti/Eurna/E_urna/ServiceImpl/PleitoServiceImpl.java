@@ -76,4 +76,27 @@ public class PleitoServiceImpl implements PleitoService {
     }
     return pleitoRepository.findPleitoStatus(StatusPleito.ENCERRADO);
   }
+
+  @Override
+  public Pleito atualizarPleito(Long id) {
+    int valor = pleitoRepository.updateStatus(id);
+
+    if(valor == 0){
+      return null;
+    }
+    Optional<Pleito> voto = pleitoRepository.findById(id);
+    return voto.get();
+  }
+
+  @Override
+  public boolean removerPleito(Long id){
+    Optional<Pleito> pleito = pleitoRepository.findById(id);
+
+    if(pleito.isPresent()){
+      pleitoRepository.delete(pleito.get());
+      return true;
+    }
+
+    return false;
+  }
 }

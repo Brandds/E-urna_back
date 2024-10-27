@@ -12,4 +12,6 @@ public interface PleitoService {
   List<Pleito> getAllPleito();
   Pleito adicionarPleito(PleitoVo entity);
   List<Pleito> buscarPorDataTermino(boolean status);
+  Pleito atualizarPleito(Long id);
+  boolean removerPleito(Long id);
 }
