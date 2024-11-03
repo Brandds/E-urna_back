@@ -1,8 +1,11 @@
 package br.com.puc.ti.Eurna.E_urna.Entity;
 
+import br.com.puc.ti.Eurna.E_urna.Enum.TipoUsuarioEnum;
 import br.com.puc.ti.Eurna.E_urna.VO.UsuarioVo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,6 +29,10 @@ public class Usuario {
   private String senha;
   
   private String curso;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name ="tipo_usuario", nullable = false)
+  private TipoUsuarioEnum tipoUsuarioEnum = TipoUsuarioEnum.ALUNO;
   public Usuario(){}
   
   public void adicionarUsuario(UsuarioVo usuarioVo){
@@ -34,6 +41,9 @@ public class Usuario {
     setSenha(usuarioVo.getSenhaUsuario());
     setEmail(usuarioVo.getEmail());
     setCurso(usuarioVo.getCurso());
+    setTipoUsuarioEnum(usuarioVo.getNumeroMatriculaPessoa().length() > 6 ?
+      TipoUsuarioEnum.ADMIN : TipoUsuarioEnum.ALUNO
+    );
   }
   public Usuario( Long _id){
     this.id = _id;

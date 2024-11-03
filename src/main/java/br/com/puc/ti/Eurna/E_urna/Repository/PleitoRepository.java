@@ -30,7 +30,4 @@ public interface PleitoRepository  extends JpaRepository<Pleito, Long>{
   @Transactional
   @Query("UPDATE Pleito p SET p.status = 'ENCERRADO' WHERE p.dataTermino <= CURRENT_TIMESTAMP")
   int encerrarPleitos();
-
-
-
 }

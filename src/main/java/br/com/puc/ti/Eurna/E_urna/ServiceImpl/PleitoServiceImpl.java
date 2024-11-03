@@ -1,5 +1,6 @@
 package br.com.puc.ti.Eurna.E_urna.ServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,9 +15,20 @@ import br.com.puc.ti.Eurna.E_urna.Repository.PleitoRepository;
 import br.com.puc.ti.Eurna.E_urna.Service.PleitoService;
 import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
+import br.com.puc.ti.Eurna.E_urna.VO.PleitoVotosVO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+
+
+
+
 
 @Service
 public class PleitoServiceImpl implements PleitoService {
+
+  @PersistenceContext
+	private EntityManager entityManager;
 
   @Autowired
   private PleitoRepository pleitoRepository;
@@ -98,5 +110,87 @@ public class PleitoServiceImpl implements PleitoService {
     }
 
     return false;
+  }
+
+  @Override
+  public Candidato getGanhadorPleito() {
+    // TODO Auto-generated method stub
+    return null;
+    
+  }
+
+  @Override
+  public PleitoVotosVO ganhadorPleitoVotosVO(Long id) {
+
+    StringBuilder hql = new StringBuilder();
+    hql = hqlGanhadorPleito(hql);
+    Query query = entityManager.createNativeQuery(hql.toString());
+    query.setParameter("pleitoId", id);
+
+    List<Object[]> lista = query.getResultList();
+    PleitoVotosVO pleitoVotosVO = new PleitoVotosVO();
+    for(Object[] obj : lista){
+      if(obj[0] != null){
+        pleitoVotosVO.setNomePleito((String) obj[0]);
+      }
+      if(obj[1] != null){
+        pleitoVotosVO.setCandidatoNome((String) obj[1]);
+      }
+      if(obj[2] != null){
+        pleitoVotosVO.setTotalVotos((Long) obj[2]);
+      }
+    }
+    return pleitoVotosVO;
+  }
+
+  @Override
+  public Integer totalVotosPleito(Long id) {
+    // TODO Auto-generated method stub
+    StringBuilder hql = new StringBuilder();
+    hql = hqlTotalVotosPleito(hql);
+    Query query = entityManager.createNativeQuery(hql.toString());
+    query.setParameter("pleitoId", id);
+
+    BigDecimal receberValor = (BigDecimal) query.getSingleResult();
+    Integer valor =  receberValor != null ? receberValor.intValue() + 1 : null;
+    return valor;
+
+  }
+  
+  private StringBuilder hqlGanhadorPleito(StringBuilder hql){
+    hql.append(" SELECT ");
+    hql.append(" cast(p.nome_pleito as varchar) as nomePleito, ");
+    hql.append(" cast(c.nome as varchar) as candidatoNome, ");
+    hql.append(" SUM(v.numero_votos) as totalVotos ");
+    hql.append(" FROM ");
+    hql.append(" voto v ");
+    hql.append(" JOIN ");
+    hql.append(" candidato c ON v.numero_candidato = c.id ");
+    hql.append(" JOIN ");
+    hql.append(" pleito p ON v.pleito_id = p.id");
+    hql.append(" WHERE ");
+    hql.append(" v.pleito_id = :pleitoId");
+    hql.append(" GROUP BY ");
+    hql.append(" p.nome_pleito, c.nome");
+    hql.append(" LIMIT 1");
+    return hql;
+  }
+
+  private StringBuilder hqlTotalVotosPleito(StringBuilder hql){
+    hql.append(" SELECT ");
+    hql.append(" SUM(SUM(v.numero_votos)) OVER ");
+    hql.append(" (PARTITION BY p.nome_pleito) AS votosPleito");
+    hql.append(" FROM ");
+    hql.append(" voto v");
+    hql.append(" JOIN ");
+    hql.append(" candidato c ON v.numero_candidato = c.id ");
+    hql.append(" JOIN ");
+    hql.append(" pleito p ON v.pleito_id = c.id ");
+    hql.append(" WHERE ");
+    hql.append(" v.pleito_id = :pleitoId ");
+    hql.append(" GROUP BY ");
+    hql.append(" p.nome_pleito, c.nome ");
+    hql.append(" LIMIT 1");
+    return hql;
   }
 }

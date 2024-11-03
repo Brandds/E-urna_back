@@ -18,5 +18,8 @@ public interface VotoRepository extends JpaRepository<Voto, Long> {
 
   @Query("SELECT SUM(v.numeroVotos) FROM Voto v WHERE v.candidato.id = :id")
   Integer findVotosCanidados(@Param("id") Long id);
-  
+
+  @Query("SELECT SUM(v.numeroVotos) FROM Voto v WHERE v.pleito.id = :id")
+  Integer findVotosPleito(@Param("id") Long id); 
 }
+

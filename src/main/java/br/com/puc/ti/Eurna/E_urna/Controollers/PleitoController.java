@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.puc.ti.Eurna.E_urna.Entity.Pleito;
 import br.com.puc.ti.Eurna.E_urna.Service.PleitoService;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
+import br.com.puc.ti.Eurna.E_urna.VO.PleitoVotosVO;
+
 
 
 
@@ -71,7 +73,16 @@ public class PleitoController {
       ResponseEntity.ok("Pleito excluido com sucesso") :
       ResponseEntity.badRequest().body("Pleito não foi encontrado")
       );
-      
+  }
 
+  @GetMapping("/ganhadorPleito/{id}")
+  public ResponseEntity getGanhadorPleito(@PathVariable Long id) {
+    PleitoVotosVO ganhador = pleitoService.ganhadorPleitoVotosVO(id);
+    return ResponseEntity.ok(ganhador);
+  }
+
+  @GetMapping("/allPleitosVoto/{id}")
+  public ResponseEntity getAllPleitos(@PathVariable Long id) {
+      return ResponseEntity.ok(pleitoService.totalVotosPleito(id));
   }
 }

@@ -18,10 +18,6 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 import br.com.puc.ti.Eurna.E_urna.Service.CandidatoService;
 import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
 
-
-
-
-
 @RestController
 @RequestMapping("/candidato")
 public class CandidatoController {
