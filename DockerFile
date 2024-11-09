@@ -20,5 +20,4 @@ COPY --from=build /target/E-urna-0.0.1-SNAPSHOT app.jar
 # Expõe a porta que o aplicativo usará
 EXPOSE 8085
 
-# Comando para rodar a aplicação (ajuste conforme necessário)
 ENTRYPOINT ["java", "-jar", "app.jar"]
