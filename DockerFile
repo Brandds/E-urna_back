@@ -15,7 +15,8 @@ RUN mvn clean install
 FROM openjdk:17-jdk-slim
 
 # Copiar o arquivo JAR do build para a imagem final
-COPY --from=build /target/E-urna-0.0.1-SNAPSHOT app.jar
+COPY --from=build /target/E-urna-0.0.1-SNAPSHOT.jar app.jar
+
 
 # Expõe a porta que o aplicativo usará
 EXPOSE 8085
