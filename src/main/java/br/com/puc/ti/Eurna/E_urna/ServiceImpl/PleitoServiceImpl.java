@@ -1,6 +1,7 @@
 package br.com.puc.ti.Eurna.E_urna.ServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -145,7 +146,6 @@ public class PleitoServiceImpl implements PleitoService {
 
   @Override
   public Integer totalVotosPleito(Long id) {
-    // TODO Auto-generated method stub
     StringBuilder hql = new StringBuilder();
     hql = hqlTotalVotosPleito(hql);
     Query query = entityManager.createNativeQuery(hql.toString());
@@ -193,4 +193,19 @@ public class PleitoServiceImpl implements PleitoService {
     hql.append(" LIMIT 1");
     return hql;
   }
+  @Override
+  public List<CandidatoVo> candidatoPleito(Long id) {
+    List<Candidato> candidatos = candidatoRepository.findByPleitoId(id);
+    List<CandidatoVo> lista = new ArrayList<>();
+
+    if(candidatos.size() > 0){
+      for(Candidato candidato : candidatos){
+        lista.add(candidato.toVo());
+      }
+    }
+
+    return lista;
+  }
+
+  
 }

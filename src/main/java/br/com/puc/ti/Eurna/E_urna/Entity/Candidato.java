@@ -2,6 +2,8 @@ package br.com.puc.ti.Eurna.E_urna.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
+import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,16 @@ public class Candidato {
   public Candidato(Long _numeroCandidato, Long _id){
     this.id = _id;
     this.numeroCandidato = _numeroCandidato;
+  }
+
+  public CandidatoVo toVo(){
+    CandidatoVo candidatoVo = new CandidatoVo();
+    candidatoVo.setId(getId());
+    candidatoVo.setCursoCandidato(getCurso());
+    candidatoVo.setNomeCandidato(getNome());
+    candidatoVo.setNumeroCandidato(getNumeroCandidato());
+    candidatoVo.setPleito_Id_Candidato(new PleitoVo(getPleito().getId()));
+    return candidatoVo;
   }
   
 }

@@ -16,4 +16,8 @@ public class PleitoVo {
   private Date data_termino;
   private int votoTotais;
   private List<CandidatoVo> candidatos;
+
+  public PleitoVo(Long id){
+    this.id = id;
+  }
 }

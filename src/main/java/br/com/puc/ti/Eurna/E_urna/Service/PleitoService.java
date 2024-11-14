@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Candidato;
 import br.com.puc.ti.Eurna.E_urna.Entity.Pleito;
+import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVotosVO;
 
@@ -19,4 +20,5 @@ public interface PleitoService {
   Candidato getGanhadorPleito();
   PleitoVotosVO ganhadorPleitoVotosVO(Long id);
   Integer totalVotosPleito(Long id);
+  List<CandidatoVo> candidatoPleito(Long id);
 }

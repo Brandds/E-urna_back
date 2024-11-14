@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.puc.ti.Eurna.E_urna.Entity.Pleito;
 import br.com.puc.ti.Eurna.E_urna.Service.PleitoService;
+import br.com.puc.ti.Eurna.E_urna.VO.CandidatoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.PleitoVotosVO;
 
@@ -85,4 +86,11 @@ public class PleitoController {
   public ResponseEntity getAllPleitos(@PathVariable Long id) {
       return ResponseEntity.ok(pleitoService.totalVotosPleito(id));
   }
+
+  @PostMapping("/buscarCadidato/{id}")
+  public ResponseEntity<?> postMethodName(@PathVariable Long id) {
+      List<CandidatoVo> lista = pleitoService.candidatoPleito(id);
+      return  lista.size() > 0 ? ResponseEntity.ok(lista) : ResponseEntity.badRequest().body("Nenhum candidato");
+  }
+  
 }
