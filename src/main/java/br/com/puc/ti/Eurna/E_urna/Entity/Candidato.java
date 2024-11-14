@@ -1,5 +1,7 @@
 package br.com.puc.ti.Eurna.E_urna.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,8 @@ public class Candidato {
 
   @Column(name = "numero_candidato", nullable = false, unique = true)
   private Long numeroCandidato;  
-
+      
+  @JsonBackReference
   @ManyToOne
   @JoinColumn(name = "pleito_id", nullable = false)
   private Pleito pleito;

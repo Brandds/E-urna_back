@@ -3,6 +3,8 @@ package br.com.puc.ti.Eurna.E_urna.Entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.puc.ti.Eurna.E_urna.Enum.StatusPleito;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -40,8 +42,8 @@ public class Pleito {
   @Column(name = "votos_totais")
   private int votosTotais;
   
-  
-  @OneToMany(mappedBy = "pleito", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @JsonManagedReference
+  @OneToMany(mappedBy = "pleito", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Candidato> candidatos;
 
   public Pleito(Long id){
