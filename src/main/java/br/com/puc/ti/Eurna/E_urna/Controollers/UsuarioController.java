@@ -39,10 +39,10 @@ public class UsuarioController {
   public ResponseEntity<?> login(@RequestBody UsuarioVo login){
     
     
-    boolean validarUsuario = usuarioService.validarUsuario(login.getNumeroMatriculaPessoa(),login.getSenhaUsuario());
+    UsuarioVo usuarioVo = usuarioService.validarUsuario(login.getNumeroMatriculaPessoa(),login.getSenhaUsuario());
 
-    if(validarUsuario){
-      return ResponseEntity.ok("Usuario bem sucedido");
+    if(usuarioVo != null){
+      return ResponseEntity.ok(usuarioVo);
     }
 
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario ou senha invalidos");

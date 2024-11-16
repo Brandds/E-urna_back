@@ -45,6 +45,17 @@ public class Usuario {
       TipoUsuarioEnum.ADMIN : TipoUsuarioEnum.ALUNO
     );
   }
+
+  public UsuarioVo toVo(){
+    UsuarioVo usuarioVo = new UsuarioVo();
+    usuarioVo.setCurso(getCurso());
+    usuarioVo.setEmail(getEmail());
+    usuarioVo.setId(getId());
+    usuarioVo.setNomeUsuario(getNome());
+
+    return usuarioVo;
+  }
+
   public Usuario( Long _id){
     this.id = _id;
   }

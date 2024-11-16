@@ -10,7 +10,7 @@ import br.com.puc.ti.Eurna.E_urna.VO.UsuarioVo;
 @Service
 public interface UsuarioService {
   
-  boolean validarUsuario(String matricula , String senha);
+  UsuarioVo validarUsuario(String matricula , String senha);
 
   boolean validarCadastroUsuario(String newMatricula);
 

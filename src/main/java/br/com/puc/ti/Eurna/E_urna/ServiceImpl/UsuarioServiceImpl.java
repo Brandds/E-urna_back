@@ -25,15 +25,17 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public boolean validarUsuario(String matricula, String senha) {
+  public UsuarioVo validarUsuario(String matricula, String senha) {
     Optional<Usuario> userMatricula = usuarioRepository.findByNumMatricula(matricula);
 
     if (userMatricula.isPresent()) {
       Usuario usuario = userMatricula.get();
 
-      return usuario.getSenha() != null && usuario.getSenha().equals(senha);
+      if(usuario.getSenha() != null && usuario.getSenha().equals(senha)){
+        return usuario.toVo();
+      }
     }
-    return false;
+    return null;
   }
 
   @Override
