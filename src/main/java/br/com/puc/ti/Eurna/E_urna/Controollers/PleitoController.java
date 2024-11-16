@@ -32,7 +32,7 @@ public class PleitoController {
 
   @GetMapping("/pleitoAll")
   public ResponseEntity<?> getAllPleito() {
-      List<Pleito> listaPleito = pleitoService.getAllPleito();
+      List<PleitoVo> listaPleito = pleitoService.getAllPleito();
 
       if(listaPleito.size() == 0){
         return new ResponseEntity<>("Não nenhum pleito cadastrado",HttpStatus.NO_CONTENT);

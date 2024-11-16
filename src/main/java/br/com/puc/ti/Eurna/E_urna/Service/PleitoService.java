@@ -12,7 +12,7 @@ import br.com.puc.ti.Eurna.E_urna.VO.PleitoVotosVO;
 
 @Service
 public interface PleitoService {
-  List<Pleito> getAllPleito();
+  List<PleitoVo> getAllPleito();
   Pleito adicionarPleito(PleitoVo entity);
   List<Pleito> buscarPorDataTermino(boolean status);
   Pleito atualizarPleito(Long id);

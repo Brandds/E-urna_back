@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.puc.ti.Eurna.E_urna.Enum.StatusPleito;
+import br.com.puc.ti.Eurna.E_urna.VO.PleitoVo;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,15 +53,14 @@ public class Pleito {
 
   public Pleito(){}
   
-  private StatusPleito calcularStatus(){
-    Date hoje = new Date();
-    
-    if(hoje.before(dataTermino)){
-      return StatusPleito.ATIVO;
-    }else{
-      return  StatusPleito.ENCERRADO;
-    }
-
-
+  public PleitoVo toVo(){
+    PleitoVo pleitoVo = new PleitoVo();
+    pleitoVo.setId(getId());
+    pleitoVo.setNomePleito(nomePleito);
+    pleitoVo.setStatus(getStatus());
+    pleitoVo.setData_inicio(getDataInicio());
+    pleitoVo.setData_termino(getDataTermino());
+    pleitoVo.setVotoTotais(getVotosTotais());
+    return pleitoVo;
   }
 }

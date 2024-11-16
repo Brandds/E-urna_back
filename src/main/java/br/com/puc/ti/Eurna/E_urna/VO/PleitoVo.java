@@ -20,4 +20,6 @@ public class PleitoVo {
   public PleitoVo(Long id){
     this.id = id;
   }
+
+  public PleitoVo(){}
 }

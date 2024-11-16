@@ -50,10 +50,14 @@ public class PleitoServiceImpl implements PleitoService {
   }
 
   @Override
-  public List<Pleito> getAllPleito(){
+  public List<PleitoVo> getAllPleito(){
     pleitoRepository.encerrarPleitos();
     List<Pleito> pleitos = pleitoRepository.findAll();
-    return pleitos;
+    List<PleitoVo> pleitoVO = new ArrayList<>();
+
+    for(Pleito pleito : pleitos) pleitoVO.add(pleito.toVo());
+    
+    return pleitoVO;
   }
   
   @Override
