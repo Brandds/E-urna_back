@@ -1,5 +1,6 @@
 package br.com.puc.ti.Eurna.E_urna.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,9 +50,14 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public List<Usuario> getUsuarios(){
+  public List<UsuarioVo> getUsuarios(){
     List<Usuario> usuarios = usuarioRepository.findAll();
-    return usuarios;
+    List<UsuarioVo> usuarioVo = new  ArrayList<>();
+
+    for(Usuario usuarioVo2 : usuarios){
+      usuarioVo.add(usuarioVo2.toVo());
+    }
+    return usuarioVo;
   }
 
   @Override

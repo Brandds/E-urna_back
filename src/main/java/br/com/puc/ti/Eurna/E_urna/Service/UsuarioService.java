@@ -14,7 +14,7 @@ public interface UsuarioService {
 
   boolean validarCadastroUsuario(String newMatricula);
 
-  List<Usuario> getUsuarios();
+  List<UsuarioVo> getUsuarios();
 
   Usuario updateUsuario(Long id, UsuarioVo usuarioVo);
 
