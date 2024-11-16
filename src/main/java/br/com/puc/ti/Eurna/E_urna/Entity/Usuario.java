@@ -52,6 +52,7 @@ public class Usuario {
     usuarioVo.setEmail(getEmail());
     usuarioVo.setId(getId());
     usuarioVo.setNomeUsuario(getNome());
+    usuarioVo.setTipoUsuarioEnum(getTipoUsuarioEnum());
 
     return usuarioVo;
   }
