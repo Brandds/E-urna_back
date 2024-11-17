@@ -65,15 +65,15 @@ public class PleitoServiceImpl implements PleitoService {
     Pleito pleito = toEntity(vo);
     pleitoRepository.save(pleito);
 
-    if(vo.getCandidatos().size() != 0){
-      int tamnhanho = vo.getCandidatos().size();
-      List<CandidatoVo> listCandidato = vo.getCandidatos();
-      for(int i = 0; tamnhanho > i;i++ ){
-        Candidato candidato = new  Candidato();
-        candidato = addCandidato(listCandidato.get(i), pleito ); 
-        candidatoRepository.save(candidato);
-      }
-    }
+    // if(vo.getCandidatos().size() != 0){
+    //   int tamnhanho = vo.getCandidatos().size();
+    //   List<CandidatoVo> listCandidato = vo.getCandidatos();
+    //   for(int i = 0; tamnhanho > i;i++ ){
+    //     Candidato candidato = new  Candidato();
+    //     candidato = addCandidato(listCandidato.get(i), pleito ); 
+    //     candidatoRepository.save(candidato);
+    //   }
+    // }
     return pleito;
   }
 
