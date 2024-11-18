@@ -48,14 +48,13 @@ public class VotoController {
   }
 
   @PostMapping("/votosCandidato/{id}")
-  public String calcularVotos(@PathVariable Long id) {
+  public ResponseEntity<Integer> calcularVotos(@PathVariable Long id) {
       Integer valor =  votoService.calcularVotoUusuario(id);
-      String mensagem = "O candidato tem" + " " +  valor +  " votos";
       if(valor != null){
-        return mensagem;
+        return ResponseEntity.ok(valor);
       }
-
-      return mensagem = "Não foi encontrado o candidato";
+      return ResponseEntity.ok(0);
+      
     }
   
   
