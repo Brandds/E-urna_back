@@ -39,12 +39,13 @@ public class VotoController {
   }
   
   @PostMapping("/buscarVoto/{id}")
-  public ResponseEntity buscarVoto(@PathVariable Long id) {
+  public ResponseEntity<Integer> buscarVoto(@PathVariable Long id) {
       Usuario usuario = votoService.getVotoUsuario(id);
       if(usuario != null){
-        return  new  ResponseEntity<>(usuario, HttpStatus.OK);
+        return ResponseEntity.ok(1);
       }
-      return new ResponseEntity<>("Não foi encontrado o voto", HttpStatus.BAD_REQUEST);
+      return ResponseEntity.ok(0);
+
   }
 
   @PostMapping("/votosCandidato/{id}")
