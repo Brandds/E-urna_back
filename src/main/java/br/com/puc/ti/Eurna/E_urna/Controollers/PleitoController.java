@@ -90,7 +90,7 @@ public class PleitoController {
   @PostMapping("/buscarCadidato/{id}")
   public ResponseEntity<?> postMethodName(@PathVariable Long id) {
       List<CandidatoVo> lista = pleitoService.candidatoPleito(id);
-      return  lista.size() > 0 ? ResponseEntity.ok(lista) : ResponseEntity.badRequest().body("Nenhum candidato");
+      return  lista.size() > 0 ? ResponseEntity.ok(lista) : ResponseEntity.ok(lista);
   }
   
 }
