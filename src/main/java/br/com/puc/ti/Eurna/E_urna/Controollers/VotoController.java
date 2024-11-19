@@ -39,7 +39,7 @@ public class VotoController {
       return new ResponseEntity<>("Foi cadastro o voto!", HttpStatus.OK);
   }
   
-  @PostMapping("/buscarVoto/{id}")
+  @PostMapping("/buscarVoto")
   public ResponseEntity<Integer> buscarVoto(@RequestBody VotoVoSwaper voto) {
       Usuario usuario = votoService.getVotoUsuario(voto.getId(), voto.getId2());
       if(usuario != null){
