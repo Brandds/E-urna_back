@@ -14,6 +14,7 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Usuario;
 import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 import br.com.puc.ti.Eurna.E_urna.Service.VotoService;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
+import br.com.puc.ti.Eurna.E_urna.VO.VotoVoSwaper;
 
 
 
@@ -39,8 +40,8 @@ public class VotoController {
   }
   
   @PostMapping("/buscarVoto/{id}")
-  public ResponseEntity<Integer> buscarVoto(@PathVariable Long id) {
-      Usuario usuario = votoService.getVotoUsuario(id);
+  public ResponseEntity<Integer> buscarVoto(@RequestBody VotoVoSwaper voto) {
+      Usuario usuario = votoService.getVotoUsuario(voto.getId(), voto.getId2());
       if(usuario != null){
         return ResponseEntity.ok(1);
       }

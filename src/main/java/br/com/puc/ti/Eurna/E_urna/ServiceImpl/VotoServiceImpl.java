@@ -59,9 +59,9 @@ public class VotoServiceImpl implements VotoService {
     }
 
   @Override
-  public Usuario getVotoUsuario(Long id) {
-    Optional<Voto> votoUsuario = votoRepository.findByUsuario(id);
-    if(votoUsuario.isPresent()){
+  public Usuario getVotoUsuario(Long id, Long id2) {
+    List<Voto> voto = votoRepository.findByPleitoIdAndUsuarioId(id, id2);
+    if(voto.size() > 0){
       Optional<Usuario> usuario =  usuarioRepository.findById(id);
       return usuario.get();
     }

@@ -11,7 +11,7 @@ import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
 @Service
 public interface VotoService {
  List<Voto> getAllVoto();
- Usuario getVotoUsuario(Long id);
+ Usuario getVotoUsuario(Long id, Long id2);
  Voto adicionarVoto(VotoVo entity);
  Integer calcularVotoUusuario(Long id);
 }
