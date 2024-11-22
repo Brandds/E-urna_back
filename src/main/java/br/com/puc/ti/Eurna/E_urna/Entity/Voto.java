@@ -7,9 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -31,15 +28,13 @@ public class Voto {
   @Temporal(TemporalType.DATE)
   private Date dataRegistro;
 
-  @ManyToOne
-@JoinColumn(name = "numero_candidato", referencedColumnName = "id", nullable = false)
-  private Candidato candidato;
+  
+  @Column(name = "pleito")
+  private Long pleitoId;
 
-  @OneToOne
-@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false)
-  private Usuario usuario;
-
-  @ManyToOne
-  @JoinColumn(name = "pleito_id", referencedColumnName = "id", nullable = false)
-  private Pleito pleito;
+  @Column(name = "numero_candidato")
+  private Long numeroCandidato;
+  
+  @Column(name = "usuario_id")
+  private Long usuarioId;
 }

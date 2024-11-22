@@ -10,7 +10,7 @@ public class VotoVo {
   private Long id;
   private Integer numeroVotos;
   private Date dataRegistro;
-  private CandidatoVo candidatoVo;
-  private UsuarioVo usuarioVo;
-  private PleitoVo pleitoVo;
+  private Long candidatoId;
+  private Long usuarioId;
+  private Long pleitoId;
 }

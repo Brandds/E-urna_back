@@ -169,7 +169,7 @@ public class PleitoServiceImpl implements PleitoService {
     hql.append(" FROM ");
     hql.append(" voto v ");
     hql.append(" JOIN ");
-    hql.append(" candidato c ON v.numero_candidato = c.id ");
+    hql.append(" candidato c ON v.numero_candidato = c.numero_candidato ");
     hql.append(" JOIN ");
     hql.append(" pleito p ON v.pleito_id = p.id");
     hql.append(" WHERE ");
@@ -187,7 +187,7 @@ public class PleitoServiceImpl implements PleitoService {
     hql.append(" FROM ");
     hql.append(" voto v");
     hql.append(" JOIN ");
-    hql.append(" candidato c ON v.numero_candidato = c.id ");
+    hql.append(" candidato c ON v.numero_candidato = c.numero_candidato ");
     hql.append(" JOIN ");
     hql.append(" pleito p ON v.pleito_id = c.id ");
     hql.append(" WHERE ");

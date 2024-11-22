@@ -33,6 +33,8 @@ public class Usuario {
   @Enumerated(EnumType.STRING)
   @Column(name ="tipo_usuario", nullable = false)
   private TipoUsuarioEnum tipoUsuarioEnum = TipoUsuarioEnum.ALUNO;
+
+  
   public Usuario(){}
   
   public void adicionarUsuario(UsuarioVo usuarioVo){
