@@ -29,7 +29,7 @@ public class Voto {
   private Date dataRegistro;
 
   
-  @Column(name = "pleito")
+  @Column(name = "pleito_id")
   private Long pleitoId;
 
   @Column(name = "numero_candidato")
