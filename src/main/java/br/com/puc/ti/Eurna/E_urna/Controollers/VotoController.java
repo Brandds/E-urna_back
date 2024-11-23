@@ -1,5 +1,7 @@
 package br.com.puc.ti.Eurna.E_urna.Controollers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import br.com.puc.ti.Eurna.E_urna.Entity.Voto;
 import br.com.puc.ti.Eurna.E_urna.Service.VotoService;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVoSwaper;
+import br.com.puc.ti.Eurna.E_urna.VO.VotosVO;
+
 
 
 
@@ -56,8 +60,13 @@ public class VotoController {
         return ResponseEntity.ok(valor);
       }
       return ResponseEntity.ok(0);
-      
     }
+  
+    @PostMapping("/allVotosCandidate/{id}")
+    public ResponseEntity<List<VotosVO>> getAllVotosCandidate(@PathVariable Long id) {
+        return ResponseEntity.ok(votoService.findAllVotosGroupedByCandidato(id));
+    }
+    
   
   
   

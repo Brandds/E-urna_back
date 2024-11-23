@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import br.com.puc.ti.Eurna.E_urna.Repository.UsuarioRepository;
 import br.com.puc.ti.Eurna.E_urna.Repository.VotoRepository;
 import br.com.puc.ti.Eurna.E_urna.Service.VotoService;
 import br.com.puc.ti.Eurna.E_urna.VO.VotoVo;
+import br.com.puc.ti.Eurna.E_urna.VO.VotosVO;
 
 @Service
 public class VotoServiceImpl implements VotoService {
@@ -70,6 +72,17 @@ public class VotoServiceImpl implements VotoService {
   @Override
   public Integer calcularVotoUusuario(Long id){
     return votoRepository.findTotalVotos(id);
+  }
+
+  @Override
+  public List<VotosVO> findAllVotosGroupedByCandidato(Long id){
+    List<Object[]> lista = votoRepository.findAllVotosGroupedByCandidato(id);
+    return lista.stream()
+      .map(obj -> new VotosVO(
+        ((Long) obj[0]).longValue(),
+        ((Long) obj[1]).longValue()
+      ))
+      .collect(Collectors.toList());
   }
 
   
