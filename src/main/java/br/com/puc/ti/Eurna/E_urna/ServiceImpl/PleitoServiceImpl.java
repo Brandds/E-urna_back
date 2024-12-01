@@ -211,5 +211,15 @@ public class PleitoServiceImpl implements PleitoService {
     return lista;
   }
 
+  @Override
+  public PleitoVo getPleitoId(Long id) {
+    Optional<Pleito> pleito = pleitoRepository.findById(id);
+    if(pleito.isPresent()){
+      return pleito.get().toVo();
+    }
+    return null;
+
+  }
+
   
 }

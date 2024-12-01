@@ -92,5 +92,12 @@ public class PleitoController {
       List<CandidatoVo> lista = pleitoService.candidatoPleito(id);
       return  lista.size() > 0 ? ResponseEntity.ok(lista) : ResponseEntity.ok(lista);
   }
+
+  @PostMapping("/buscarPleitoId/{id}")
+  public ResponseEntity<PleitoVo> getPleitoId(@PathVariable Long id) {
+      PleitoVo pleitoVo = pleitoService.getPleitoId(id);
+      return ResponseEntity.ok(pleitoVo);
+  }
+  
   
 }

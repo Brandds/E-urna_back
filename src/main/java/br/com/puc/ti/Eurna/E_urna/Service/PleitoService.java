@@ -21,4 +21,5 @@ public interface PleitoService {
   PleitoVotosVO ganhadorPleitoVotosVO(Long id);
   Integer totalVotosPleito(Long id);
   List<CandidatoVo> candidatoPleito(Long id);
+  PleitoVo getPleitoId(Long id);
 }
